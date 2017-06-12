@@ -53,8 +53,10 @@ class Vgg16():
             Downloads the Imagenet classes index file and loads it to self.classes.
             The file is downloaded only if it not already in the cache.
         """
-        fname = 'imagenet_class_index.json'
-        fpath = get_file(fname, self.FILE_PATH+fname, cache_subdir='models')
+        # Use the shared Crestle path
+        # fname = 'imagenet_class_index.json'
+        # fpath = get_file(fname, self.FILE_PATH+fname, cache_subdir='models')
+        fpath = '/datasets/fast.ai/models/imagenet_class_index.json'
         with open(fpath) as f:
             class_dict = json.load(f)
         self.classes = [class_dict[str(i)][1] for i in range(len(class_dict))]
@@ -135,8 +137,9 @@ class Vgg16():
         self.FCBlock()
         model.add(Dense(1000, activation='softmax'))
 
-        fname = 'vgg16.h5'
-        model.load_weights(get_file(fname, self.FILE_PATH+fname, cache_subdir='models'))
+        # Use the shared Crestle path
+        fpath = '/datasets/fast.ai/models/vgg16.h5'
+        model.load_weights(fpath)
 
 
     def get_batches(self, path, gen=image.ImageDataGenerator(), shuffle=True, batch_size=8, class_mode='categorical'):

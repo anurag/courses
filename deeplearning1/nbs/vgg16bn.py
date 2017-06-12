@@ -37,8 +37,10 @@ class Vgg16BN():
 
 
     def get_classes(self):
-        fname = 'imagenet_class_index.json'
-        fpath = get_file(fname, self.FILE_PATH+fname, cache_subdir='models')
+        # Use the shared Crestle path
+        # fname = 'imagenet_class_index.json'
+        # fpath = get_file(fname, self.FILE_PATH+fname, cache_subdir='models')
+        fpath = '/datasets/fast.ai/models/imagenet_class_index.json'
         with open(fpath) as f:
             class_dict = json.load(f)
         self.classes = [class_dict[str(i)][1] for i in range(len(class_dict))]
